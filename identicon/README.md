@@ -1,6 +1,6 @@
 # Identicon
 
-**TODO: Add description**
+Generating a random identicon image by utilizing basic Elixir module
 
 ## Installation
 
