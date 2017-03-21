@@ -2,11 +2,11 @@ defmodule Cards do
           ## writing module docs
 
           @moduledoc """
-                    Provides methods for creating and handling a deck of cards
+               Provides methods for creating and handling a deck of cards
           """
 
           @doc """
-                    return a list of strings representing a deck of cards
+               return a list of strings representing a deck of cards
           """
           def create_deck do
                     values = ["Ace", "Two", "Three", "Four", "Five"]
@@ -23,13 +23,13 @@ defmodule Cards do
 
           #######
           @doc ~S"""
-                    Determines whether a deck contains a given card
+               Determines whether a deck contains a given card
 
           ## Examples
 
-                              iex> deck = Cards.create_deck
-                              iex> Cards.contains?(deck, "Ace of Spades")
-                              true
+                    iex> deck = Cards.create_deck
+                    iex> Cards.contains?(deck, "Ace of Spades")
+                    true
 
           """
           def contains?(deck, hand) do
@@ -47,10 +47,10 @@ defmodule Cards do
 
           ## Examples
 
-                              iex> deck = Cards.create_deck
-                              iex> {hand, deck} = Cards.deal(deck, 1)
-                              iex> hand
-                              ["Ace of Spades"]
+                    iex> deck = Cards.create_deck
+                    iex> {hand, deck} = Cards.deal(deck, 1)
+                    iex> hand
+                    ["Ace of Spades"]
 
           """
           def deal(deck, hand_size) do
