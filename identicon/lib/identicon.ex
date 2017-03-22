@@ -7,6 +7,23 @@ defmodule Identicon do
     input
     |> hash_input
     |> pick_color
+  def build_grid(%Identicon.Image{ hex: hex } = image) do 
+    grid = 
+      hex
+        |> Enum.chunk(3)
+        |> Enum.map(&mirror_rows/1)
+        |> List.flatten
+        |> Enum.with_index # return index : value for each grid and put that to a grid field in Image struct
+    %Identicon.Image{image | grid: grid}
+  end
+
+  # one rows of grid will have 5 elements
+  # input [a,b,c]
+  # output [a,b,c,b,a]
+  def mirror_rows(list) do 
+    [first, second | _tail] = list
+
+    list ++ [second, first]
   end
 
   ## we can do pattern matching inside argument list
