@@ -3,6 +3,11 @@ defmodule Identicon do
   This module is for 
   """
 
+  ### NOTE TO ALL FUNCTION HERE
+  ### THE REASON WHY WE USE PATTERN MATCHING IN ARGUMENT IN ANY FUNCTION BEWLOW (EXCEPT draw_image)
+  ### IS that we need to take in use of the image structs
+  ### if we dont need the whole image struct e.g. draw_image, we can only call a part of image struct in an argument eventhough 
+  ### in a main function pipeline we passing a whole image struct to each function
   def main(input) do
     input
       |> hash_input
@@ -10,6 +15,23 @@ defmodule Identicon do
       |> build_grid
       |> filter_odd_squares
       |> build_pixel_map
+      |> draw_image
+      |> save_image(input)
+  end
+
+  def save_image(imageFile, imageString) do
+    File.write("#{imageString}.png", imageFile)
+  end
+
+  def draw_image(%Identicon.Image{color: color, pixel_map: pixel_map}) do
+    image = :edg.create(250, 250)
+    fill = :edg.color(color)
+
+    Enum.each pixel_map, fn({start , stop}) -> 
+      :edg.filledRectangle(image, start, stop, fill)
+    end
+
+    :edg.render(image)
   end
 
   def build_pixel_map(%Identicon.Image{grid: grid} = image) do 
